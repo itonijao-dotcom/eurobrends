@@ -1057,7 +1057,7 @@ main {
   }
 
   .brand-card img {
-    max-height: 38px;
+    max-height: 46px;
   }
 
   .location__meta-card,
@@ -1198,6 +1198,6 @@ main {
   }
 
   .brand-card img {
-    max-height: 34px;
+    max-height: 42px;
   }
 }
