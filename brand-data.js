@@ -460,7 +460,7 @@ window.EUROBRENDS_CATALOG = [
       {
         "id": "cleaning-reckit-and-benkiser",
         "name": "Reckitt Benckiser",
-        "logo": "",
+        "logo": "assets/brand-logos/cleaning/reckitt-benckiser.svg",
         "products": [],
         "subBrands": [
           {
@@ -1078,7 +1078,7 @@ window.EUROBRENDS_CATALOG = [
       {
         "id": "personal-reckit-and-benkiser",
         "name": "Reckitt Benckiser",
-        "logo": "",
+        "logo": "assets/brand-logos/personal/reckitt-benckiser.svg",
         "products": [],
         "subBrands": [
           {
