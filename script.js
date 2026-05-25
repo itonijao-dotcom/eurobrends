@@ -22,6 +22,8 @@ const translations = {
       "Kompania jonë është e specializuar në shitjen dhe distribuimin e detergjenteve, produkteve kozmetike dhe mallrave të konsumit të përditshëm, duke bashkëpunuar me brendet më të njohura dhe më të besueshme në treg.",
     "about.p2":
       "Synimi ynë është të jemi partner i besueshëm për bizneset dhe konsumatorët, duke ofruar produkte që i përgjigjen nevojave reale të tregut me standarde të larta shërbimi dhe çmime konkuruese.",
+    "about.p3":
+      "Suksesi ynë ndërtohet përmes besimit, cilësisë dhe partneritetit afatgjatë. Çdo ditë punojmë që të jemi zgjedhja e parë për biznese dhe klientë që kërkojnë produkte cilësore, shërbim të shpejtë dhe bashkëpunim të sigurt.",
     "stats.title": "Shërbim i besueshëm i distribuimit për brende të njohura",
     "stats.partners": "Brende partnere",
     "stats.clients": "Klientë me shumicë",
@@ -30,6 +32,16 @@ const translations = {
     "brands.cleaning.title": "Detergjentë & Produkte Pastrimi",
     "brands.beauty.eyebrow": "Brende të besueshme",
     "brands.beauty.title": "Kozmetikë & Kujdes Personal",
+    "brands.eyebrow": "Portofoli ynë",
+    "brands.title": "Brendet & Produktet",
+    "brands.back": "Kthehu",
+    "brands.subBrands": "Zgjidh një nën-brand",
+    "brands.products": "Produktet",
+    "brands.empty": "Nuk ka produkte të vendosura ende për këtë brand.",
+    "brands.category.cleaning.eyebrow": "Partnerët tanë",
+    "brands.category.cleaning.title": "Detergjentë & Produkte Pastrimi",
+    "brands.category.personal.eyebrow": "Brende të besueshme",
+    "brands.category.personal.title": "Kozmetikë & Kujdes Personal",
     "location.eyebrow": "Lokacioni ynë",
     "location.title": "Na gjeni direkt në Google Maps",
     "location.copy":
@@ -75,6 +87,8 @@ const translations = {
       "Нашата компанија е специјализирана за продажба и дистрибуција на детергенти, козметички производи и стоки за секојдневна потрошувачка, соработувајќи со најпознатите и најдоверливите брендови на пазарот.",
     "about.p2":
       "Нашата цел е да бидеме доверлив партнер за бизнисите и потрошувачите, нудејќи производи што одговараат на реалните потреби на пазарот со високи стандарди на услуга и конкурентни цени.",
+    "about.p3":
+      "Нашиот успех се гради преку доверба, квалитет и долгорочно партнерство. Секој ден работиме да бидеме прв избор за бизниси и клиенти кои бараат квалитетни производи, брза услуга и сигурна соработка.",
     "stats.title": "Сигурна дистрибутивна услуга за познати брендови",
     "stats.partners": "Партнерски брендови",
     "stats.clients": "Големопродажни клиенти",
@@ -83,6 +97,16 @@ const translations = {
     "brands.cleaning.title": "Детергенти и производи за чистење",
     "brands.beauty.eyebrow": "Доверливи брендови",
     "brands.beauty.title": "Козметика и лична нега",
+    "brands.eyebrow": "Наше портфолио",
+    "brands.title": "Брендови и производи",
+    "brands.back": "Назад",
+    "brands.subBrands": "Изберете подбренд",
+    "brands.products": "Производи",
+    "brands.empty": "Сè уште нема поставени производи за овој бренд.",
+    "brands.category.cleaning.eyebrow": "Наши партнери",
+    "brands.category.cleaning.title": "Детергенти и производи за чистење",
+    "brands.category.personal.eyebrow": "Доверливи брендови",
+    "brands.category.personal.title": "Козметика и лична нега",
     "location.eyebrow": "Нашата локација",
     "location.title": "Најдете нè директно на Google Maps",
     "location.copy":
@@ -128,6 +152,8 @@ const translations = {
       "Our company specializes in the sale and distribution of detergents, cosmetic products and everyday consumer goods, working with some of the best-known and most trusted brands on the market.",
     "about.p2":
       "Our goal is to be a trusted partner for businesses and consumers by offering products that meet real market needs with high service standards and competitive pricing.",
+    "about.p3":
+      "Our success is built on trust, quality and long-term partnership. Every day, we work to be the first choice for businesses and customers looking for quality products, fast service and reliable cooperation.",
     "stats.title": "Reliable distribution service for well-known brands",
     "stats.partners": "Partner brands",
     "stats.clients": "Wholesale clients",
@@ -136,6 +162,16 @@ const translations = {
     "brands.cleaning.title": "Detergents & Cleaning Products",
     "brands.beauty.eyebrow": "Trusted brands",
     "brands.beauty.title": "Cosmetics & Personal Care",
+    "brands.eyebrow": "Our portfolio",
+    "brands.title": "Brands & Products",
+    "brands.back": "Back",
+    "brands.subBrands": "Choose a sub-brand",
+    "brands.products": "Products",
+    "brands.empty": "No products have been added for this brand yet.",
+    "brands.category.cleaning.eyebrow": "Our partners",
+    "brands.category.cleaning.title": "Detergents & Cleaning Products",
+    "brands.category.personal.eyebrow": "Trusted brands",
+    "brands.category.personal.title": "Cosmetics & Personal Care",
     "location.eyebrow": "Our location",
     "location.title": "Find us directly on Google Maps",
     "location.copy":
@@ -169,8 +205,19 @@ const statValues = document.querySelectorAll("[data-count]");
 const langButtons = document.querySelectorAll(".lang-btn");
 const metaDescription = document.querySelector('meta[name="description"]');
 const mapFrame = document.querySelector(".location__map-shell iframe");
+const catalogRoot = document.querySelector("[data-brand-catalog]");
+const catalogTabs = document.querySelector(".catalog__tabs");
+const catalogView = document.querySelector("[data-brand-view]");
+const catalogBack = document.querySelector("[data-brand-back]");
+const catalogPath = document.querySelector("[data-brand-path]");
 
 let currentLang = DEFAULT_LANG;
+const catalogState = {
+  categoryIndex: 0,
+  view: "groups",
+  groupId: null,
+  subBrandId: null
+};
 
 const t = (lang, key) => translations[lang]?.[key] ?? translations[DEFAULT_LANG]?.[key] ?? key;
 
@@ -212,11 +259,180 @@ const applyTranslations = (lang) => {
     button.classList.toggle("is-active", button.dataset.lang === currentLang);
   });
 
+  renderCatalog();
+
   const currentUrl = new URL(window.location.href);
   currentUrl.searchParams.set("lang", currentLang);
   window.history.replaceState({}, "", currentUrl);
   window.localStorage.setItem("eurobrends-language", currentLang);
 };
+
+const getCatalog = () => window.EUROBRENDS_CATALOG || [];
+const categoryTitle = (category) => t(currentLang, `brands.category.${category.id}.title`) || category.title;
+
+const makeImage = (src, alt) => {
+  const image = document.createElement("img");
+  image.src = src;
+  image.alt = alt;
+  image.loading = "lazy";
+  return image;
+};
+
+const makeBrandCard = (item, onClick) => {
+  const button = document.createElement("button");
+  button.className = "brand-card";
+  button.type = "button";
+  button.setAttribute("aria-label", item.name);
+  button.append(makeImage(item.logo, item.name));
+
+  const name = document.createElement("span");
+  name.className = "brand-card__name";
+  name.textContent = item.name;
+  button.append(name);
+  button.addEventListener("click", onClick);
+  return button;
+};
+
+const renderProducts = (products) => {
+  if (!products.length) {
+    const empty = document.createElement("p");
+    empty.className = "catalog__empty";
+    empty.textContent = t(currentLang, "brands.empty");
+    catalogView.append(empty);
+    return;
+  }
+
+  const grid = document.createElement("div");
+  grid.className = "product-grid";
+
+  products.forEach((product) => {
+    const card = document.createElement("article");
+    card.className = "product-card";
+
+    const imageWrap = document.createElement("div");
+    imageWrap.className = "product-card__image";
+    imageWrap.append(makeImage(product.image, product.name));
+
+    const name = document.createElement("p");
+    name.className = "product-card__name";
+    name.textContent = product.name;
+
+    card.append(imageWrap, name);
+    grid.append(card);
+  });
+
+  catalogView.append(grid);
+};
+
+const setCatalogPath = (category, group, subBrand) => {
+  if (!catalogPath) {
+    return;
+  }
+
+  const parts = [category ? categoryTitle(category) : "", group?.name, subBrand?.name].filter(Boolean);
+  catalogPath.textContent = parts.join(" / ");
+};
+
+const renderCatalog = () => {
+  const catalog = getCatalog();
+
+  if (!catalogRoot || !catalogTabs || !catalogView || !catalog.length) {
+    return;
+  }
+
+  const category = catalog[catalogState.categoryIndex] || catalog[0];
+  const groups = category.groups || [];
+  const group = groups.find((item) => item.id === catalogState.groupId);
+  const subBrand = group?.subBrands?.find((item) => item.id === catalogState.subBrandId);
+
+  catalogTabs.innerHTML = "";
+  catalogView.innerHTML = "";
+
+  catalog.forEach((item, index) => {
+    const tab = document.createElement("button");
+    tab.className = "catalog__tab";
+    tab.classList.toggle("is-active", index === catalogState.categoryIndex);
+    tab.type = "button";
+    tab.role = "tab";
+    tab.setAttribute("aria-selected", String(index === catalogState.categoryIndex));
+    tab.textContent = categoryTitle(item);
+    tab.addEventListener("click", () => {
+      catalogState.categoryIndex = index;
+      catalogState.view = "groups";
+      catalogState.groupId = null;
+      catalogState.subBrandId = null;
+      renderCatalog();
+    });
+    catalogTabs.append(tab);
+  });
+
+  if (catalogBack) {
+    catalogBack.hidden = catalogState.view === "groups";
+  }
+
+  if (catalogState.view === "subbrands" && group) {
+    setCatalogPath(category, group);
+    const grid = document.createElement("div");
+    grid.className = "brand-grid";
+
+    if (group.subBrands.length) {
+      group.subBrands.forEach((item) => {
+        grid.append(makeBrandCard(item, () => {
+          catalogState.view = "products";
+          catalogState.subBrandId = item.id;
+          renderCatalog();
+        }));
+      });
+      catalogView.append(grid);
+    } else {
+      renderProducts(group.products || []);
+    }
+    return;
+  }
+
+  if (catalogState.view === "products" && group) {
+    setCatalogPath(category, group, subBrand);
+    renderProducts(subBrand?.products || group.products || []);
+    return;
+  }
+
+  catalogState.view = "groups";
+  catalogState.groupId = null;
+  catalogState.subBrandId = null;
+  setCatalogPath(category);
+
+  const grid = document.createElement("div");
+  grid.className = "brand-grid";
+
+  groups.forEach((item) => {
+    grid.append(makeBrandCard(item, () => {
+      catalogState.groupId = item.id;
+      catalogState.subBrandId = null;
+      catalogState.view = item.subBrands?.length ? "subbrands" : "products";
+      renderCatalog();
+    }));
+  });
+
+  catalogView.append(grid);
+};
+
+if (catalogBack) {
+  catalogBack.addEventListener("click", () => {
+    if (catalogState.view === "products") {
+      const catalog = getCatalog();
+      const category = catalog[catalogState.categoryIndex];
+      const group = category?.groups?.find((item) => item.id === catalogState.groupId);
+      catalogState.view = group?.subBrands?.length ? "subbrands" : "groups";
+      catalogState.subBrandId = null;
+    } else {
+      catalogState.view = "groups";
+      catalogState.groupId = null;
+      catalogState.subBrandId = null;
+    }
+
+    renderCatalog();
+  });
+}
 
 window.addEventListener("load", () => {
   const urlLang = new URLSearchParams(window.location.search).get("lang");
